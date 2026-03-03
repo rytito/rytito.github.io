@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Raul Tito-Tadeo | Microbiome Researcher</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f0;
+      --surface: #ffffff;
+      --ink: #1a1a18;
+      --muted: #6b6b63;
+      --accent: #3a6b4a;
+      --accent-light: #e8f0eb;
+      --border: #e0ddd6;
+      --mono: 'DM Mono', monospace;
+      --serif: 'EB Garamond', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(247, 245, 240, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* LAYOUT */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    /* HERO */
+    #hero {
+      padding-top: 9rem;
+      padding-bottom: 5rem;
+    }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.1s forwards;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.35s forwards;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.5s forwards;
+    }
+
+    .chip {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--muted);
+      background: var(--surface);
+    }
+
+    .chip.green {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* SECTION TITLES */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.9rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 1rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .stat {
+      padding: 1.2rem 1.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+    }
+
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* RESEARCH */
+    .projects { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.6rem 1.8rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.2s;
+      transform-origin: bottom;
+    }
+
+    .project-card:hover { border-color: var(--accent); transform: translateX(3px); }
+    .project-card:hover::before { transform: scaleY(1); }
+
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* PUBLICATIONS */
+    .pub-list { display: flex; flex-direction: column; gap: 0; }
+
+    .pub-item {
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+
+    .pub-item:first-child { border-top: 1px solid var(--border); }
+
+    .pub-year {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      white-space: nowrap;
+      min-width: 3.5rem;
+    }
+
+    .pub-title {
+      font-size: 0.98rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .pub-title a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .pub-title a:hover { color: var(--accent); border-color: var(--accent); }
+
+    .pub-meta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .pub-journal {
+      display: inline-block;
+      font-style: italic;
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-right: 0.5rem;
+    }
+
+    .pub-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.1rem 0.5rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 2px;
+      vertical-align: middle;
+    }
+
+    .pub-more {
+      margin-top: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .pub-more a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 1.2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--ink);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .contact-icon {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      min-width: 4rem;
+    }
+
+    .contact-val {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* DIVIDER */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">R. Tito-Tadeo</span>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-tag">Molecular Biologist · KU Leuven</div>
+      <h1>Raul<br><em>Tito-Tadeo</em></h1>
+      <p class="hero-sub">
+        Project Manager – Microbiome Research in the Global South.<br>
+        Exploring human microbial communities across populations, from the Amazon rainforest to the clinic.
+      </p>
+      <div class="hero-chips">
+        <span class="chip green">Human Microbiome</span>
+        <span class="chip green">Virome</span>
+        <span class="chip green">Ancient DNA</span>
+        <span class="chip">Bioinformatics</span>
+        <span class="chip">Indigenous Communities</span>
+        <span class="chip">Global South</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="divider reveal">
+        <div class="section-label">About</div>
+        <div class="divider-line"></div>
+      </div>
+      <h2 class="reveal">Who I am</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I am a native Peruvian molecular biologist and postdoctoral scientist at KU Leuven's
+            Department of Microbiology and Immunology, dedicated to elucidating the role of human
+            microbial communities in health and disease.
+          </p>
+          <p>
+            My work bridges rigorous microbiome science with fieldwork in underrepresented populations,
+            including a 15-year collaborative study with the Matsés people of the Peruvian Amazon —
+            an effort built on long-term trust, ethical co-design, and community partnership.
+          </p>
+          <p>
+            Beyond the bench, I lead research programs in the Global South, working to ensure that
+            microbiome science reflects the full diversity of humanity.
+          </p>
+        </div>
+        <div class="about-stats reveal">
+          <div class="stat">
+            <div class="stat-num">138</div>
+            <div class="stat-label">Publications</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">11,500+</div>
+            <div class="stat-label">Citations</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">15 yrs</div>
+            <div class="stat-label">Amazonian Field Research</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="container">
+      <div class="divider reveal">
+        <div class="section-label">Research</div>
+        <div class="divider-line"></div>
+      </div>
+      <h2 class="reveal">Projects</h2>
+      <div class="projects">
+
+        <div class="project-card reveal">
+          <div class="project-tag">Ongoing · Amazon</div>
+          <h3>Matsés Microbiome Study</h3>
+          <p>A 15-year community-based collaborative study investigating the gut microbiome of the Matsés, an Indigenous Amazonian people. Developed an ethical participatory framework using community assemblies and co-designed protocols, now proposed as a model for Indigenous microbiome research globally.</p>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-tag">Clinical · Belgium</div>
+          <h3>Microbiome & Colorectal Cancer</h3>
+          <p>Investigating microbial confounders in colorectal cancer development, including landmark work published in <em>Nature Medicine</em>. Identifying bacterial signatures associated with early-stage disease and evaluating their diagnostic potential.</p>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-tag">Immunology · Belgium</div>
+          <h3>Gut Microbiome in Rheumatoid Arthritis</h3>
+          <p>Characterizing gut microbiome shifts in preclinical rheumatoid arthritis patients at KU Leuven, contributing to the understanding of how dysbiosis may precede and drive systemic autoimmune conditions.</p>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-tag">Virology · Bioinformatics</div>
+          <h3>Human Gut Virome</h3>
+          <p>Profiling the human gut virome across diverse populations using metagenomic approaches. Exploring viral diversity, phage-bacteria interactions, and how virome composition relates to health outcomes in both Western and non-Western cohorts.</p>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-tag">Ancient DNA · Archaeology</div>
+          <h3>Ancient Microbiomes</h3>
+          <p>Reconstructing the microbial communities of ancient human populations from archaeological samples. Combining aDNA techniques with modern metagenomics to trace the co-evolution of humans and their microbiota across millennia.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="container">
+      <div class="divider reveal">
+        <div class="section-label">Publications</div>
+        <div class="divider-line"></div>
+      </div>
+      <h2 class="reveal">Selected Works</h2>
+      <div class="pub-list">
+
+        <div class="pub-item reveal">
+          <div class="pub-year">2025</div>
+          <div>
+            <div class="pub-title">
+              <a href="https://www.cell.com/trends/microbiology" target="_blank">
+                Lessons from 15 years of collaborative microbiome research with Indigenous Amazonian communities
+              </a>
+              <span class="pub-badge">New</span>
+            </div>
+            <span class="pub-journal">Trends in Microbiology</span>
+            <div class="pub-meta">Tito-Tadeo R, Meza G, Raes J, Lewis C et al.</div>
+          </div>
+        </div>
+
+        <div class="pub-item reveal">
+          <div class="pub-year">2024</div>
+          <div>
+            <div class="pub-title">
+              <a href="https://www.nature.com/nm/" target="_blank">
+                Microbiome confounders in colorectal cancer development
+              </a>
+            </div>
+            <span class="pub-journal">Nature Medicine</span>
+            <div class="pub-meta">Tito-Tadeo R et al. · KU Leuven–VIB</div>
+          </div>
+        </div>
+
+        <div class="pub-item reveal">
+          <div class="pub-year">2023</div>
+          <div>
+            <div class="pub-title">
+              <a href="https://scholar.google.com/citations?user=kgkG_04AAAAJ" target="_blank">
+                Gut microbiome alterations in preclinical rheumatoid arthritis
+              </a>
+            </div>
+            <span class="pub-journal">Annals of the Rheumatic Diseases</span>
+            <div class="pub-meta">Tito-Tadeo R et al.</div>
+          </div>
+        </div>
+
+        <div class="pub-item reveal">
+          <div class="pub-year">2022</div>
+          <div>
+            <div class="pub-title">
+              <a href="https://scholar.google.com/citations?user=kgkG_04AAAAJ" target="_blank">
+                Characterization of the human gut virome across diverse global populations
+              </a>
+            </div>
+            <span class="pub-journal">Cell Host & Microbe</span>
+            <div class="pub-meta">Tito-Tadeo R et al.</div>
+          </div>
+        </div>
+
+        <div class="pub-item reveal">
+          <div class="pub-year">2012</div>
+          <div>
+            <div class="pub-title">
+              <a href="https://scholar.google.com/citations?user=kgkG_04AAAAJ" target="_blank">
+                Insights from characterizing extinct human gut microbiomes
+              </a>
+            </div>
+            <span class="pub-journal">PLOS ONE</span>
+            <div class="pub-meta">Tito RY et al. · Foundational Matsés study</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pub-more reveal">
+        <a href="https://scholar.google.com/citations?user=kgkG_04AAAAJ" target="_blank">
+          View all 138 publications on Google Scholar →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="divider reveal">
+        <div class="section-label">Contact</div>
+        <div class="divider-line"></div>
+      </div>
+      <h2 class="reveal">Get in touch</h2>
+      <p class="reveal" style="color: var(--muted); font-size: 1rem; margin-bottom: 2rem; max-width: 480px;">
+        I am open to collaborations, especially with researchers and communities in the Global South working on microbiome, ancient DNA, or Indigenous health projects.
+      </p>
+      <div class="contact-grid reveal">
+        <a class="contact-link" href="https://scholar.google.com/citations?user=kgkG_04AAAAJ" target="_blank">
+          <span class="contact-icon">Scholar</span>
+          <span class="contact-val">Google Scholar Profile</span>
+        </a>
+        <a class="contact-link" href="https://orcid.org/0000-0001-9660-7621" target="_blank">
+          <span class="contact-icon">ORCID</span>
+          <span class="contact-val">0000-0001-9660-7621</span>
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/raul-tito-tadeo-96065467/" target="_blank">
+          <span class="contact-icon">LinkedIn</span>
+          <span class="contact-val">raul-tito-tadeo</span>
+        </a>
+        <a class="contact-link" href="https://github.com/rytito" target="_blank">
+          <span class="contact-icon">GitHub</span>
+          <span class="contact-val">rytito</span>
+        </a>
+        <a class="contact-link" href="https://twitter.com/ancientOmics" target="_blank">
+          <span class="contact-icon">X / Twitter</span>
+          <span class="contact-val">@ancientOmics</span>
+        </a>
+        <a class="contact-link" href="https://bsky.app/profile/yayomics.bsky.social" target="_blank">
+          <span class="contact-icon">Bluesky</span>
+          <span class="contact-val">@yayomics.bsky.social</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Raul Tito-Tadeo · KU Leuven · Department of Microbiology &amp; Immunology</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
