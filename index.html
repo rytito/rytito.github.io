@@ -67,6 +67,18 @@
   }
   ul.pubs li:last-child { border-bottom: none; }
   ul.pubs .venue { color: var(--muted); font-size: 0.88rem; }
+  .photo-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.9rem;
+  }
+  .photo-grid figure { margin: 0; }
+  .photo-grid img {
+    width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+    border-radius: 12px; display: block;
+  }
+  .photo-grid figcaption {
+    font-size: 0.82rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.4;
+  }
   em { font-style: italic; }
   a.plain { color: var(--accent); text-decoration: none; }
   a.plain:hover { text-decoration: underline; }
@@ -130,6 +142,48 @@
         rheumatoid arthritis, HIV and iron status, colorectal cancer.</p>
       <p class="meta">Gut Microbes 2024 · RMD Open 2024 · IWT colorectal cancer
         project · Project manager</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fieldwork</h2>
+    <div class="photo-grid">
+      <figure>
+        <img src="assets/images/mooi_team.jpg"
+             alt="MOOI expedition team holding the Peruvian flag in the Amazon">
+        <figcaption><a class="plain"
+          href="https://research.kuleuven.be/portal/en/project/3M200058">MOOI</a>
+          expedition team, Peruvian Amazon — long-term observatory of
+          industrialization-induced gut microbiome change (FWO).</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/images/flin_team.jpg"
+             alt="Flora Intestinal Nativa Peruana field team in Peru">
+        <figcaption>Flora Intestinal Nativa Peruana (FLIN) field team —
+          multi-domain microbiome study across the urbanization
+          continuum.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/images/microandes_fermentation_pool.jpg"
+             alt="Tocosh fermentation pool in the Peruvian Andes">
+        <figcaption>Tocosh fermentation pool in the high Andes —
+          <a class="plain"
+          href="https://research.kuleuven.be/portal/nl/project/3M250529">MicroAndes</a>
+          (VLIR, KU&nbsp;Leuven &amp; Universidad Nacional del Centro del
+          Perú).</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/images/microandes_fieldwork.jpg"
+             alt="Sampling tocosh with a local producer community">
+        <figcaption>Sampling tocosh with a producer community —
+          MicroAndes.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/images/microandes_tocosh.jpg"
+             alt="Freshly harvested fermented tocosh potatoes">
+        <figcaption>Freshly harvested fermented tocosh —
+          MicroAndes.</figcaption>
+      </figure>
     </div>
   </section>
 
